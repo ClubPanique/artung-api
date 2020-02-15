@@ -68,6 +68,11 @@ class Artists
      */
     private $fans;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="artist", cascade={"persist", "remove"})
+     */
+    private $user;
+
     public function __construct()
     {
         $this->fans = new ArrayCollection();
@@ -207,6 +212,24 @@ class Artists
     {
         if ($this->fans->contains($fan)) {
             $this->fans->removeElement($fan);
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newArtist = null === $user ? null : $this;
+        if ($user->getArtist() !== $newArtist) {
+            $user->setArtist($newArtist);
         }
 
         return $this;
