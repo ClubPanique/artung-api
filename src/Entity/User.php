@@ -33,6 +33,16 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Artists", inversedBy="user", cascade={"persist", "remove"})
+     */
+    private $artist;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Fans", inversedBy="user", cascade={"persist", "remove"})
+     */
+    private $fan;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -109,5 +119,29 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getArtist(): ?Artists
+    {
+        return $this->artist;
+    }
+
+    public function setArtist(?Artists $artist): self
+    {
+        $this->artist = $artist;
+
+        return $this;
+    }
+
+    public function getFan(): ?Fans
+    {
+        return $this->fan;
+    }
+
+    public function setFan(?Fans $fan): self
+    {
+        $this->fan = $fan;
+
+        return $this;
     }
 }

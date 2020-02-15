@@ -38,6 +38,11 @@ class Fans
      */
     private $favoris;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="fan", cascade={"persist", "remove"})
+     */
+    private $user;
+
     public function __construct()
     {
         $this->favoris = new ArrayCollection();
@@ -107,6 +112,24 @@ class Fans
         if ($this->favoris->contains($favori)) {
             $this->favoris->removeElement($favori);
             $favori->removeFan($this);
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newFan = null === $user ? null : $this;
+        if ($user->getFan() !== $newFan) {
+            $user->setFan($newFan);
         }
 
         return $this;
