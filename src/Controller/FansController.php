@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * @Route("/fans")
@@ -18,11 +19,17 @@ class FansController extends AbstractController
     /**
      * @Route("/", name="fans_index", methods={"GET"})
      */
-    public function index(FansRepository $fansRepository): Response
+    public function index(FansRepository $fansRepository, SerializerInterface $serializer): Response
     {
-        return $this->render('fans/index.html.twig', [
-            'fans' => $fansRepository->findAll(),
-        ]);
+        $fans = $fansRepository->findAll();
+        $data = $serializer->serialize($fans, 'json');
+        $response = new Response(
+            'Content',
+            Response::HTTP_OK,
+            ['content-type' => 'text/html']
+        );
+        $response->setContent($data);
+        return $response;
     }
 
     /**
@@ -83,7 +90,7 @@ class FansController extends AbstractController
      */
     public function delete(Request $request, Fans $fan): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$fan->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $fan->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($fan);
             $entityManager->flush();
