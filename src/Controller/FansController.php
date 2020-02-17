@@ -8,6 +8,7 @@ use App\Repository\FansRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -16,14 +17,26 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class FansController extends AbstractController
 {
+    /** @var EntityManagerInterface */
+    private $em;
+
+    /** @var SerializerInterface */
+    private $serializer;
+
+    public function __construct(SerializerInterface $serializer)
+    {
+        $this->em = $this->getDoctrine()->getManager();
+        $this->serializer = $serializer;
+    }
+
     /**
      * @Route("/", name="fans_index", methods={"GET"})
      */
-    public function index(FansRepository $fansRepository, SerializerInterface $serializer): Response
+    public function index(FansRepository $fansRepository): JsonResponse
     {
         $fans = $fansRepository->findAll();
-        $data = $serializer->serialize($fans, 'json');
-        $response = new Response(
+        $data = $this->serializer->serialize($fans, 'json');
+        $response = new JsonResponse(
             'Content',
             Response::HTTP_OK,
             ['content-type' => 'application/json']
@@ -37,14 +50,15 @@ class FansController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        //$reqData = $request->getContent() ? $request->getContent() : null;
+        // TODO
         $fan = new Fans();
         $form = $this->createForm(FansType::class, $fan);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($fan);
-            $entityManager->flush();
+            $this->em->persist($fan);
+            $this->em->flush();
 
             return $this->redirectToRoute('fans_index');
         }
