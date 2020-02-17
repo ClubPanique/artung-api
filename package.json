@@ -1,0 +1,46 @@
+{
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress",
+        "csfix": "eslint assets/vue --ext .js,.vue, --fix"
+    },
+    "dependencies": {
+        "@babel/plugin-transform-runtime": "^7.8.3",
+        "@babel/runtime": "^7.8.4",
+        "@fortawesome/fontawesome-svg-core": "^1.2.27",
+        "@fortawesome/free-brands-svg-icons": "^5.12.1",
+        "@fortawesome/free-regular-svg-icons": "^5.12.1",
+        "@fortawesome/free-solid-svg-icons": "^5.12.1",
+        "@fortawesome/vue-fontawesome": "^0.1.9",
+        "babel-eslint": "^10.0.3",
+        "bootstrap": "^4.4.1",
+        "node-sass": "^4.13.1",
+        "sass-loader": "^7.0.1",
+        "vue-loader": "^15.9.0",
+        "vue-router": "^3.1.5",
+        "vue-template-compiler": "^2.6.11"
+    },
+    "devDependencies": {
+        "@symfony/webpack-encore": "^0.28.2",
+        "core-js": "^3.0.0",
+        "regenerator-runtime": "^0.13.2",
+        "vue": "^2.6.11",
+        "webpack-notifier": "^1.6.0",
+        "@vue/cli-plugin-babel": "^4.1.0",
+        "@vue/cli-plugin-eslint": "^4.1.0",
+        "@vue/cli-service": "^4.1.0",
+        "eslint": "^6.8.0",
+        "eslint-loader": "^3.0.3",
+        "eslint-plugin-vue": "^6.2.1"
+    },
+    "browserslist": [
+        "> 0.5%",
+        "last 2 versions",
+        "Firefox ESR",
+        "not dead"
+    ]
+}

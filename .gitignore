@@ -1,5 +1,6 @@
 .env
 composer.lock
+package-lock.json
 symfony.lock
 ###> symfony/framework-bundle ###
 /.env.local
@@ -10,3 +11,10 @@ symfony.lock
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###

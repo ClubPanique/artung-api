@@ -1,0 +1,35 @@
+// Ecrire les variables personnalisées ici :
+$theme-colors: (
+  'primary': rgba(219, 92, 61, 1),
+  'secondary': rgba(18, 41, 50, 1),
+  'light': rgba(243, 239, 245, 1),
+  'dark': rgba(64, 63, 76, 1),
+  'black': rgba(19, 27, 35, 1),
+);
+
+// Exemple de personnalisation des variables :
+/*
+$theme-colors: (
+  'primary': #003d8e,
+  'secondary': #e85e0e,
+  'danger': #e8270e,
+  'light': #f1f7ff,
+  'dark': #003d8e,
+);
+
+//Enlève le border-radius sur les boutons :
+$btn-border-radius: none;
+$btn-border-radius-lg: none;
+$btn-border-radius-sm: none;
+
+$font-size-base: 1rem;
+$h3-font-size: $font-size-base * 1.25;
+
+$spacer: 1rem !default;
+
+$spacers: (
+  6: (
+    $spacer * 4,
+  ),
+);
+*/
