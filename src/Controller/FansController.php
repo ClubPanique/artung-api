@@ -26,7 +26,7 @@ class FansController extends AbstractController
         $response = new Response(
             'Content',
             Response::HTTP_OK,
-            ['content-type' => 'text/html']
+            ['content-type' => 'application/json']
         );
         $response->setContent($data);
         return $response;
