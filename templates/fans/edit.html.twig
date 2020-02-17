@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Fans{% endblock %}
+
+{% block body %}
+    <h1>Edit Fans</h1>
+
+    {{ include('fans/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('fans_index') }}">back to list</a>
+
+    {{ include('fans/_delete_form.html.twig') }}
+{% endblock %}
