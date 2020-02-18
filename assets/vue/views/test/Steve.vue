@@ -1,25 +1,23 @@
 <template>
   <div class="fond">
-    <FormGroupInline icon-status="wordpress" />
-    <FormGroup type-status="password" />
-    <Checkbox />
-    <TextButton
-      secondary
-      form
-    />
-    <EditIcon />
+    <FormGroupInline iconStatus="wordpress"></FormGroupInline>
+    <FormGroup typeStatus="email"></FormGroup>
+    <Checkbox></Checkbox>
+    <TextButton secondary form></TextButton>
+    <EditIcon></EditIcon>
+    TEST
   </div>
 </template>
 
 <script>
-import TextButton from '../../components/buttons/TextButton'
-import Checkbox from '../../components/forms/Checkbox'
-import FormGroup from '../../components/forms/FormGroup'
-import FormGroupInline from '../../components/forms/FormGroupInline'
-import EditIcon from '../../components/buttons/EditIcon'
+import TextButton from "../../components/buttons/TextButton";
+import Checkbox from "../../components/forms/Checkbox";
+import FormGroup from "../../components/forms/FormGroup";
+import FormGroupInline from "../../components/forms/FormGroupInline";
+import EditIcon from "../../components/buttons/EditIcon";
 
 export default {
-  name: 'Steve',
+  name: "Steve",
   components: {
     FormGroup,
     Checkbox,
@@ -36,8 +34,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .fond {
-    background: #131b23;
-    background: #444444;
-  }
+.fond {
+  background: #131b23;
+}
 </style>
