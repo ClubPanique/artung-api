@@ -48,8 +48,8 @@ class FansController extends AbstractController
         $entityManager->persist($fan);
         $entityManager->flush();
 
-        // Envoi d'une reponse avec un statut 200
-        return new Response(null, 200, []);
+        // Envoi de la réponse
+        return new Response("Profil ajouté", Response::HTTP_OK, []);
     }
 
     /**
@@ -87,21 +87,27 @@ class FansController extends AbstractController
 
         $this->getDoctrine()->getManager()->flush();
 
-        // Envoi d'une reponse avec un statut 200
-        return new Response(null, 200, []);
+        // Envoi de la réponse
+        return new Response("Profil modifié", Response::HTTP_OK, []);
     }
 
     /**
      * @Route("/{id}", name="fans_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Fans $fan): Response
+    public function delete(Request $request, FansRepository $fansRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $fan->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($fan);
-            $entityManager->flush();
-        }
+        $id = $request->get('id');
+        $fan = $fansRepository->findOneBy(['id' => $id]);
 
-        return $this->redirectToRoute('fans_index');
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($fan);
+        $entityManager->flush();
+
+        if (!$fansRepository->findOneBy(['id' => $id])) {
+            // Envoi de la réponse
+            return new Response("Profil supprimé", 200, []);
+        } else {
+            return new Response("Echec de la suppression du profil", 500, []);
+        }
     }
 }
