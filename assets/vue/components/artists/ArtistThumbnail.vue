@@ -28,14 +28,14 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   img {
-    width: 50px;
-    height: 50px;
+    width: 56px;
+    height: 56px;
   }
   .categoryButton {
     cursor: pointer;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 2px;
+    left: 2px;
     border: 0;
     background-color: transparent;
     width: 0; 

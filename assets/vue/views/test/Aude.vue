@@ -1,16 +1,16 @@
 <template>
   <div>
-    <ArtistThumbnail />
+    <ArtistCard />
   </div>
 </template>
 
 <script>
-import ArtistThumbnail from '../../components/artists/ArtistThumbnail'
+import ArtistCard from '../../components/artists/ArtistCard'
 
 export default {
   name: 'Aude',
   components: {
-    ArtistThumbnail
+    ArtistCard
   }
 };
 </script>
