@@ -22,6 +22,7 @@ class FansController extends AbstractController
     public function index(FansRepository $fansRepository, SerializerInterface $serializer): Response
     {
         $fans = $fansRepository->findAll();
+        // Transformation de l'objet Doctrine en JSON
         $data = $serializer->serialize($fans, 'json');
         $response = new Response(
             'Content',
@@ -33,36 +34,39 @@ class FansController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="fans_new", methods={"GET","POST"})
+     * @Route("/new", name="fans_new", methods={"POST"})
      */
     public function new(Request $request): Response
     {
         $fan = new Fans();
-        $form = $this->createForm(FansType::class, $fan);
-        $form->handleRequest($request);
+        $fan->setEmail($request->request->get('email'));
+        $fan->setNickname($request->request->get('nickname'));
+        $fan->setPhoto($request->request->get('photo'));
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($fan);
-            $entityManager->flush();
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($fan);
+        $entityManager->flush();
 
-            return $this->redirectToRoute('fans_index');
-        }
-
-        return $this->render('fans/new.html.twig', [
-            'fan' => $fan,
-            'form' => $form->createView(),
-        ]);
+        // Envoi d'une reponse avec un statut 200
+        return new Response(null, 200, []);
     }
 
     /**
      * @Route("/{id}", name="fans_show", methods={"GET"})
      */
-    public function show(Fans $fan): Response
+    public function show(Request $request, FansRepository $fansRepository, SerializerInterface $serializer): Response
     {
-        return $this->render('fans/show.html.twig', [
-            'fan' => $fan,
-        ]);
+        // Récupération de la valeur de {id}
+        $id = $request->attributes->get('id');
+        $fan = $fansRepository->findOneBy(['id' => $id]);
+        $data = $serializer->serialize($fan, 'json');
+        $response = new Response(
+            'Content',
+            Response::HTTP_OK,
+            ['content-type' => 'application/json']
+        );
+        $response->setContent($data);
+        return $response;
     }
 
     /**
