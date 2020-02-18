@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Fans;
 use App\Form\FansType;
+use App\Repository\ArtistsRepository;
 use App\Repository\FansRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -92,6 +93,27 @@ class FansController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/addfav/{artistId}", name="fans_add_fav", methods={"PUT"})
+     */
+    public function addFav(Request $request, FansRepository $fansRepository, ArtistsRepository $artistsRepository): Response
+    {
+        // Récupération de la valeur de {id} (correspondant au fan) à partir de la route
+        $id = $request->get('id');
+        $artistId = $request->get('artistId');
+
+        $fan = $fansRepository->findOneBy(['id' => $id]);
+        $artist = $artistsRepository->findOneBy(['id' => $artistId]);
+
+        // On redéfinit toutes les valeurs du fan
+        $fan->addFavori($artist);
+
+        $this->getDoctrine()->getManager()->flush();
+
+        // Envoi de la réponse
+        return new Response("Profil modifié", Response::HTTP_OK, []);
+    }
+
+    /**
      * @Route("/{id}", name="fans_delete", methods={"DELETE"})
      */
     public function delete(Request $request, FansRepository $fansRepository): Response
@@ -105,7 +127,7 @@ class FansController extends AbstractController
 
         if (!$fansRepository->findOneBy(['id' => $id])) {
             // Envoi de la réponse
-            return new Response("Profil supprimé", 200, []);
+            return new Response("Profil supprimé", Response::HTTP_OK, []);
         } else {
             return new Response("Echec de la suppression du profil", 500, []);
         }
