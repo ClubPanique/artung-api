@@ -24,6 +24,7 @@ class FansController extends AbstractController
         $fans = $fansRepository->findAll();
         // Transformation de l'objet Doctrine en JSON
         $data = $serializer->serialize($fans, 'json');
+
         $response = new Response(
             'Content',
             Response::HTTP_OK,
@@ -56,8 +57,9 @@ class FansController extends AbstractController
      */
     public function show(Request $request, FansRepository $fansRepository, SerializerInterface $serializer): Response
     {
-        // Récupération de la valeur de {id}
-        $id = $request->attributes->get('id');
+        // Récupération de la valeur de {id} à partir de la route
+        $id = $request->get('id');
+
         $fan = $fansRepository->findOneBy(['id' => $id]);
         $data = $serializer->serialize($fan, 'json');
         $response = new Response(
@@ -70,23 +72,23 @@ class FansController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="fans_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="fans_edit", methods={"PUT"})
      */
-    public function edit(Request $request, Fans $fan): Response
+    public function edit(Request $request, FansRepository $fansRepository): Response
     {
-        $form = $this->createForm(FansType::class, $fan);
-        $form->handleRequest($request);
+        // Récupération de la valeur de {id} à partir de la route
+        $id = $request->get('id');
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        $fan = $fansRepository->findOneBy(['id' => $id]);
+        // On redéfinit toutes les valeurs du fan
+        $fan->setEmail($request->request->get('email'));
+        $fan->setNickname($request->request->get('nickname'));
+        $fan->setPhoto($request->request->get('photo'));
 
-            return $this->redirectToRoute('fans_index');
-        }
+        $this->getDoctrine()->getManager()->flush();
 
-        return $this->render('fans/edit.html.twig', [
-            'fan' => $fan,
-            'form' => $form->createView(),
-        ]);
+        // Envoi d'une reponse avec un statut 200
+        return new Response(null, 200, []);
     }
 
     /**
