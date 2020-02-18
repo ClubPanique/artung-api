@@ -6,8 +6,8 @@ import router from "./router";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 // Définir ici les icones à utiliser.
-import { faHome, faHeart, faMusic } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as farHeart } from "@fortawesome/free-regular-svg-icons";
+import { faHome, faHeart, faMusic, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as farHeart, faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import {
   faFacebook,
   faTwitter,
@@ -22,6 +22,8 @@ library.add(
   faHeart,
   farHeart,
   faMusic,
+  faStar,
+  farStar,
   faFacebook,
   faTwitter,
   faYoutube,
