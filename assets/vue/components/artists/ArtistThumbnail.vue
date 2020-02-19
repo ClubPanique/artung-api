@@ -13,13 +13,10 @@
 <script>
 export default {
   name: 'ArtistThumbnail',
-  data() {
-    return {
-      artist: {
-        nickname: "Sébastien Velly",
-        photo: "https://png.pngtree.com/png-clipart/20190614/original/pngtree-avatar-vector-icon-png-image_3725465.jpg",
-        category: "musique"
-      }
+  props: {
+    artist: {
+      type: Object,
+      required: true
     }
   }
 };

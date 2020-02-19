@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ArtistCard />
+    <ArtistCard :artist="infosArtistResults" />
   </div>
 </template>
 
@@ -11,6 +11,30 @@ export default {
   name: 'ListArtists',
   components: {
     ArtistCard,
+  },
+  data() {
+    return {
+      infosArtistResults: null
+    }
+  },
+  computed: {
+    urlArtist() {
+      return `${window.rootUrl}fans/1`;
+    }
+  },
+  created() {
+    this.getInfosArtist();
+  },
+  methods: {
+    async getInfosArtist() {
+      try {
+        const response = await fetch(this.urlArtist);
+        const result = await response.json();
+        this.infosArtistResults = result;
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
 };
 </script>
