@@ -3,12 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Artists;
-use App\Form\ArtistsType;
 use App\Repository\ArtistsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * @Route("/api/artists")
@@ -18,11 +18,25 @@ class ArtistsController extends AbstractController
     /**
      * @Route("/", name="artists_index", methods={"GET"})
      */
-    public function index(ArtistsRepository $artistsRepository): Response
+    public function index(ArtistsRepository $artistsRepository, SerializerInterface $serializer): Response
     {
-        return $this->render('artists/index.html.twig', [
-            'artists' => $artistsRepository->findAll(),
-        ]);
+        $artist = $artistsRepository->findAll();
+
+        // Pour pouvoir récupérer le(s) artiste(s) associés aux fans, il faut préciser ça :
+        $context['circular_reference_handler'] = function ($object) {
+            return $object->getId();
+        };
+
+        // Transformation de l'objet Doctrine en JSON
+        $data = $serializer->serialize($artist, 'json', $context);
+
+        $response = new Response(
+            'Artists',
+            Response::HTTP_OK,
+            ['Content-type' => 'application/json']
+        );
+        $response->setContent($data);
+        return $response;
     }
 
     /**
@@ -31,64 +45,89 @@ class ArtistsController extends AbstractController
     public function new(Request $request): Response
     {
         $artist = new Artists();
-        $form = $this->createForm(ArtistsType::class, $artist);
-        $form->handleRequest($request);
+        $artist->setNickname($request->request->get('nickname'));
+        $artist->setPhoto($request->request->get('photo'));
+        $artist->setCategory($request->request->get('category'));
+        $artist->setDescription($request->request->get('description'));
+        $artist->setFacebookLink($request->request->get('facebook_link'));
+        $artist->setTwitterLink($request->request->get('twitter_link'));
+        $artist->setYoutubeLink($request->request->get('youtube_link'));
+        $artist->setWordpressLink($request->request->get('wordpress_link'));
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($artist);
-            $entityManager->flush();
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($artist);
+        $entityManager->flush();
 
-            return $this->redirectToRoute('artists_index');
-        }
-
-        return $this->render('artists/new.html.twig', [
-            'artist' => $artist,
-            'form' => $form->createView(),
-        ]);
+        // Envoi de la réponse
+        return new Response("Profil ajouté", Response::HTTP_OK, []);
     }
 
     /**
      * @Route("/{id}", name="artists_show", methods={"GET"})
      */
-    public function show(Artists $artist): Response
+    public function show(Request $request, ArtistsRepository $artistsRepository, SerializerInterface $serializer): Response
     {
-        return $this->render('artists/show.html.twig', [
-            'artist' => $artist,
-        ]);
+        // Récupération de la valeur de {id} à partir de la route
+        $id = $request->get('id');
+        $artist = $artistsRepository->findOneBy(['id' => $id]);
+
+        // Pour pouvoir récupérer le(s) fan(s) associés à l'artiste, il faut préciser ça :
+        $context['circular_reference_handler'] = function ($object) {
+            return $object->getId();
+        };
+
+        $data = $serializer->serialize($artist, 'json', $context);
+        $response = new Response(
+            'Artist',
+            Response::HTTP_OK,
+            ['content-type' => 'application/json']
+        );
+        $response->setContent($data);
+        return $response;
     }
 
     /**
      * @Route("/{id}/edit", name="artists_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Artists $artist): Response
+    public function edit(Request $request, ArtistsRepository $artistsRepository): Response
     {
-        $form = $this->createForm(ArtistsType::class, $artist);
-        $form->handleRequest($request);
+        // Récupération de la valeur de {id} à partir de la route
+        $id = $request->get('id');
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        $artist = $artistsRepository->findOneBy(['id' => $id]);
+        // On redéfinit toutes les valeurs de l'artiste
+        $artist->setNickname($request->request->get('nickname'));
+        $artist->setPhoto($request->request->get('photo'));
+        $artist->setCategory($request->request->get('category'));
+        $artist->setDescription($request->request->get('description'));
+        $artist->setFacebookLink($request->request->get('facebook_link'));
+        $artist->setTwitterLink($request->request->get('twitter_link'));
+        $artist->setYoutubeLink($request->request->get('youtube_link'));
+        $artist->setWordpressLink($request->request->get('wordpress_link'));
 
-            return $this->redirectToRoute('artists_index');
-        }
+        $this->getDoctrine()->getManager()->flush();
 
-        return $this->render('artists/edit.html.twig', [
-            'artist' => $artist,
-            'form' => $form->createView(),
-        ]);
+        // Envoi de la réponse
+        return new Response("Profil modifié", Response::HTTP_OK, []);
     }
 
     /**
      * @Route("/{id}", name="artists_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Artists $artist): Response
+    public function delete(Request $request, ArtistsRepository $artistsRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $artist->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($artist);
-            $entityManager->flush();
-        }
+        $id = $request->get('id');
+        $artist = $artistsRepository->findOneBy(['id' => $id]);
 
-        return $this->redirectToRoute('artists_index');
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($artist);
+        $entityManager->flush();
+
+        if (!$artistsRepository->findOneBy(['id' => $id])) {
+            // Envoi de la réponse
+            return new Response("Profil supprimé", Response::HTTP_OK, []);
+        } else {
+            return new Response("Echec de la suppression du profil", 500, []);
+        }
     }
 }
