@@ -47,7 +47,6 @@ class FansController extends AbstractController
     public function new(Request $request): Response
     {
         $fan = new Fans();
-        $fan->setEmail($request->request->get('email'));
         $fan->setNickname($request->request->get('nickname'));
         $fan->setPhoto($request->request->get('photo'));
 
@@ -93,7 +92,6 @@ class FansController extends AbstractController
 
         $fan = $fansRepository->findOneBy(['id' => $id]);
         // On redéfinit toutes les valeurs du fan
-        $fan->setEmail($request->request->get('email'));
         $fan->setNickname($request->request->get('nickname'));
         $fan->setPhoto($request->request->get('photo'));
 
