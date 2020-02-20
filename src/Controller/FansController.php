@@ -23,13 +23,19 @@ class FansController extends AbstractController
     public function index(FansRepository $fansRepository, SerializerInterface $serializer): Response
     {
         $fans = $fansRepository->findAll();
+
+        // Pour pouvoir récupérer le(s) artiste(s) associés aux fans, il faut préciser ça :
+        $context['circular_reference_handler'] = function ($object) {
+            return $object->getId();
+        };
+
         // Transformation de l'objet Doctrine en JSON
-        $data = $serializer->serialize($fans, 'json');
+        $data = $serializer->serialize($fans, 'json', $context);
 
         $response = new Response(
             'Content',
             Response::HTTP_OK,
-            ['content-type' => 'application/json']
+            ['Content-type' => 'application/json']
         );
         $response->setContent($data);
         return $response;
@@ -60,9 +66,14 @@ class FansController extends AbstractController
     {
         // Récupération de la valeur de {id} à partir de la route
         $id = $request->get('id');
-
         $fan = $fansRepository->findOneBy(['id' => $id]);
-        $data = $serializer->serialize($fan, 'json');
+
+        // Pour pouvoir récupérer le(s) artiste(s) associés au fan, il faut préciser ça :
+        $context['circular_reference_handler'] = function ($object) {
+            return $object->getId();
+        };
+
+        $data = $serializer->serialize($fan, 'json', $context);
         $response = new Response(
             'Content',
             Response::HTTP_OK,
@@ -110,7 +121,7 @@ class FansController extends AbstractController
         $this->getDoctrine()->getManager()->flush();
 
         // Envoi de la réponse
-        return new Response("Profil modifié", Response::HTTP_OK, []);
+        return new Response("Favoris ajouté", Response::HTTP_OK, []);
     }
 
     /**
