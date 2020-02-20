@@ -3,7 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 
 // Variables globales
-window.rootUrl = "http://127.0.0.1:8000/";
+window.rootUrl = "http://localhost:8000/";
 
 // Imports fontawesome
 import { library } from '@fortawesome/fontawesome-svg-core';
