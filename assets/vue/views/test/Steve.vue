@@ -1,11 +1,18 @@
 <template>
   <div class="fond">
-    <FormGroupInline iconStatus="wordpress"></FormGroupInline>
-    <FormGroup typeStatus="email"></FormGroup>
-    <Checkbox></Checkbox>
-    <TextButton secondary form></TextButton>
-    <EditIcon></EditIcon>
-    TEST
+    <FormGroupInline
+      icon-status="twitter"
+    />
+    <FormGroup
+      type-status="email"
+      contenu="test"
+    />
+    <Checkbox />
+    <TextButton
+      secondary
+      form
+    />
+    <EditIcon />
   </div>
 </template>
 
