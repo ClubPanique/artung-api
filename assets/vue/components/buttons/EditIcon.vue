@@ -1,6 +1,9 @@
 <template>
   <div>
-    <button type="submit" class="btn btn-default btn-circle btn-lg">
+    <button
+      type="submit"
+      class="btn btn-default btn-circle btn-lg"
+    >
       <span class="checked">
         <font-awesome-icon :icon="'check'" />
       </span>
