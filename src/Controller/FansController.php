@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Fans;
-use App\Form\FansType;
 use App\Repository\ArtistsRepository;
 use App\Repository\FansRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,7 +32,7 @@ class FansController extends AbstractController
         $data = $serializer->serialize($fans, 'json', $context);
 
         $response = new Response(
-            'Content',
+            'Fans',
             Response::HTTP_OK,
             ['Content-type' => 'application/json']
         );
@@ -74,7 +73,7 @@ class FansController extends AbstractController
 
         $data = $serializer->serialize($fan, 'json', $context);
         $response = new Response(
-            'Content',
+            'Fan',
             Response::HTTP_OK,
             ['content-type' => 'application/json']
         );
