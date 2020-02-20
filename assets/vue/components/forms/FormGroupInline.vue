@@ -1,9 +1,6 @@
 <template>
   <div>
     <div>
-      <!-- <font-awesome-icon :icon="['fab', 'twitter']" />
-    <font-awesome-icon :icon="['fab', 'youtube']" />
-      <font-awesome-icon :icon="['fab', 'wordpress']" />-->
       <label for="contenu">{{ text }}</label>
     </div>
     <span v-if="icon=='facebook'">
@@ -41,16 +38,21 @@ export default {
   },
   methods: {
     iconChange: function() {
-      if (this.iconStatus == "facebook") {
+      switch (this.iconStatus) {
+      case "facebook":
         this.icon = "facebook";
-      } else if (this.iconStatus == "twitter") {
+        break;
+      case "twitter":
         this.icon = "twitter";
-      } else if (this.iconStatus == "youtube") {
+        break;
+      case "youtube":
         this.icon = "youtube";
-      } else if (this.iconStatus == "wordpress") {
+        break;
+      case "wordpress":
         this.icon = "wordpress";
-      } else {
-        // icon vide ou ?
+        break;
+      default:
+        this.icon = "";
       }
       this.$forceUpdate();
     }
@@ -60,4 +62,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+svg {
+  color: white;
+  font-size: 150%;
+}
 </style>
