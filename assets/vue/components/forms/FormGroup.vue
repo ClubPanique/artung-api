@@ -3,7 +3,7 @@
     <label :for="contenu">{{ text }}</label>
     <input
       :id="contenu"
-      :value="infosArtistResults.email"
+      :value="infosArtistResults.nickname"
       :placeholder="placeholder"
     >
   </div>

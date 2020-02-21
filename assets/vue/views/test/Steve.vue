@@ -4,8 +4,9 @@
       icon-status="twitter"
     />
     <FormGroup
-      type-status="email"
+      type-status="text"
       contenu="test"
+      text="blabla"
     />
     <Checkbox />
     <TextButton
