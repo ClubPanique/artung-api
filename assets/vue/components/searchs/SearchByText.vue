@@ -19,12 +19,6 @@ export default {
       required: true,
     },
   },
-  methods: {
-    inputChanged() {
-      // On émet un événement inputChanged et on envoie la valeur de l'input recherche.
-      this.$emit('input', this.$event.target.value);
-    },
-  },
 };
 </script>
 
