@@ -1,7 +1,11 @@
 <template>
   <a href="/fan/account">
     <div id="AccountButton">
-      <img id="AccountButtonImg" :src=fan.photo :alt="`photo de profil de ${ fan.nickname }`">
+      <img
+        id="AccountButtonImg"
+        :src="fan.photo"
+        :alt="`photo de profil de ${ fan.nickname }`"
+      >
     </div>
   </a>
 </template>
