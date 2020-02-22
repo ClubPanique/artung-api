@@ -17,7 +17,7 @@
       </button>
     </div>
     <div
-      v-show="$route.name=='ArtistDetails'"
+      v-show="$route.name=='ArtistDetails'|$route.name=='ArtistPreview'"
       class="artistDescription"
     >
       <p>
@@ -55,7 +55,6 @@ export default {
     width: 100%;
     min-height: 60px;
     max-height: 240px;
-    padding-top: 2px;
     margin-bottom: 5px;
     background-color: var(--dark);
     border-radius: 0 5px 5px 5px;
@@ -67,6 +66,7 @@ export default {
   }
   .artistInfos {
     position: relative;
+    padding-top: 2px;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
