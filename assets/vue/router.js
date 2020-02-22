@@ -56,7 +56,8 @@ const routes = [
   {
     name: "ArtistDetails",
     path: "/fan/artist/:id",
-    component: ArtistDetails
+    component: ArtistDetails,
+    props: true
   },
   {
     name: "FanAccount",

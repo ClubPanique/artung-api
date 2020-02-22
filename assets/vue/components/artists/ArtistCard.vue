@@ -2,13 +2,28 @@
   <div
     :id="`artist-${ artist.id }`"
     class="artistCard"
-    @click="$router.push({ name: 'ArtistDetails', params: { id: artist.id }})"
   >
-    <ArtistThumbnail :artist="artistProp" />
-    <span class="artistNickname">{{ artist.nickname }}</span>
-    <button class="starIcon">
-      <font-awesome-icon icon="star" />
-    </button>
+    <div
+      class="artistInfos"
+      @click="$router.push({ name: 'ArtistDetails', params: { id: artist.id, artist: artistProp }})"
+    >
+      <ArtistThumbnail :artist="artistProp" />
+      <span class="artistNickname">{{ artist.nickname }}</span>
+      <button class="starIcon">
+        <font-awesome-icon
+          :icon="['far', 'star']"
+          size="2x"
+        />
+      </button>
+    </div>
+    <div
+      v-show="$route.name=='ArtistDetails'"
+      class="artistDescription"
+    >
+      <p>
+        {{ artist.description }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -37,28 +52,44 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .artistCard {
-    position: relative;
     width: 100%;
-    height: 60px;
+    min-height: 60px;
+    max-height: 240px;
+    padding-top: 2px;
     margin-bottom: 5px;
     background-color: var(--dark);
-    border: var(--dark) solid 2px;
     border-radius: 0 5px 5px 5px;
+    cursor: pointer;
+    transition: background-color 400ms;
+  }
+  .artistCard:hover {
+    background-color: var(--light-transparent);
+  }
+  .artistInfos {
+    position: relative;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    cursor: pointer;
   }
+
   .artistNickname {
     color: var(--light);
     margin-left: 5px;
+    font-size: 1.5rem;
   }
   .starIcon {
+    position: absolute;
+    top: 2px;
+    right: 2px;
     background-color: transparent;
     color: var(--primary);
     border: 0;
+    padding: 0;
     margin-left: auto;
     margin-bottom: auto;
+  }
+  .artistDescription {
+    padding: 2px;
   }
   @media (min-width: 768px) {
     .artistCard {

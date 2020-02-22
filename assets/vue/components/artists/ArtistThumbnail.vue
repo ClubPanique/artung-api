@@ -57,18 +57,19 @@ export default {
   img {
     width: 56px;
     height: 56px;
+    margin-left: 2px;
     border-bottom-left-radius: 5px;
   }
   .categoryButton {
     cursor: pointer;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 2px;
+    left: 2px;
     border: 0;
     background-color: transparent;
     width: 0; 
     height: 0; 
-    border-left: 25px solid var(--transparent);
+    border-left: 25px solid var(--light-semi-transparent);
     border-bottom: 25px solid transparent;
   }
   svg {
