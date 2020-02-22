@@ -1,6 +1,10 @@
 <template>
   <div>
-    <ArtistCard :artist="infosArtistResults" />
+    <ArtistCard
+      v-for="(infosArtistResult, id) of infosArtistResults"
+      :key="id"
+      :artist="infosArtistResult"
+    />
   </div>
 </template>
 
@@ -19,7 +23,7 @@ export default {
   },
   computed: {
     urlArtist() {
-      return `${window.rootUrl}fans/1`;
+      return `${window.rootUrl}artists`;
     }
   },
   created() {
@@ -41,5 +45,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>

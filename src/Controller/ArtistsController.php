@@ -40,7 +40,7 @@ class ArtistsController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="artists_new", methods={"GET","POST"})
+     * @Route("/new", name="artists_new", methods={"POST"})
      */
     public function new(Request $request): Response
     {
@@ -87,7 +87,7 @@ class ArtistsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="artists_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="artists_edit", methods={"PUT"})
      */
     public function edit(Request $request, ArtistsRepository $artistsRepository): Response
     {

@@ -37,9 +37,10 @@ export default {
     position: relative;
     width: 360px;
     height: 60px;
+    margin: 5px;
     background-color: #403F4C;
     border: #403F4C solid 2px;
-    border-radius: 5px;
+    border-radius: 0 5px 5px 5px;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
