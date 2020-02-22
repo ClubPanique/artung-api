@@ -8,7 +8,9 @@
       @click="$router.push({ name: 'ArtistDetails', params: { id: artist.id, artist: artistProp }})"
     >
       <ArtistThumbnail :artist="artistProp" />
-      <span class="artistNickname">{{ artist.nickname }}</span>
+      <h2 class="artistNickname">
+        {{ artist.nickname }}
+      </h2>
       <button class="starIcon">
         <font-awesome-icon
           :icon="['far', 'star']"
