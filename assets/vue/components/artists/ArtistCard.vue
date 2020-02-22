@@ -2,10 +2,13 @@
   <div
     :id="`artist-${ artist.id }`"
     class="artistCard"
+    @click="$router.push({ name: 'ArtistDetails', params: { id: artist.id }})"
   >
     <ArtistThumbnail :artist="artistProp" />
     <span class="artistNickname">{{ artist.nickname }}</span>
-    <span class="starIcon"><font-awesome-icon icon="star" /></span>
+    <button class="starIcon">
+      <font-awesome-icon icon="star" />
+    </button>
   </div>
 </template>
 
@@ -35,22 +38,32 @@ export default {
 <style scoped>
   .artistCard {
     position: relative;
-    width: 360px;
+    width: 100%;
     height: 60px;
-    margin: 5px;
-    background-color: #403F4C;
-    border: #403F4C solid 2px;
+    margin-bottom: 5px;
+    background-color: var(--dark);
+    border: var(--dark) solid 2px;
     border-radius: 0 5px 5px 5px;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
+    cursor: pointer;
   }
   .artistNickname {
-    color: #F3EFF5;
-    margin-left: 2px;
+    color: var(--light);
+    margin-left: 5px;
   }
   .starIcon {
-    color: #DB5C4D;
+    background-color: transparent;
+    color: var(--primary);
+    border: 0;
     margin-left: auto;
+    margin-bottom: auto;
+  }
+  @media (min-width: 768px) {
+    .artistCard {
+      width: 50%;
+      margin-right: 5px;
+    }
   }
 </style>

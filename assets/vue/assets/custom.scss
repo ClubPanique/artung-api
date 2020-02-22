@@ -1,8 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
 // Ecrire les variables personnalisées ici :
 $theme-colors: (
   'primary': rgba(219, 92, 61, 1),
   'secondary': rgba(18, 41, 50, 1),
   'light': rgba(243, 239, 245, 1),
+  'transparent': rgba(243, 239, 245, 0.8),
   'dark': rgba(64, 63, 76, 1),
   'black': rgba(19, 27, 35, 1),
 );
