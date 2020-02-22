@@ -1,22 +1,32 @@
 <template>
   <div>
-    <SearchByText v-model="searchText" />
-    <SearchBySelect v-model="searchCategory" />
+    <SearchBar />
+    <p>{{ searchText }}</p>
+    <p>{{ searchCategory }}</p>
   </div>
 </template>
 
 <script>
-import SearchByText from '../../components/searchs/SearchByText.vue';
-import SearchBySelect from '../../components/searchs/SearchBySelect';
+import SearchBar from '../../components/searchs/SearchBar.vue';
+
+import {searchBus} from '../../index.js';
 
 export default {
   name: 'Alice',
-  components: {SearchByText, SearchBySelect},
+  components: {SearchBar},
   data() {
     return {
       searchText: '',
       searchCategory: '',
     };
+  },
+  created() {
+    searchBus.$on('input-text', data => {
+      this.searchText = data;
+    });
+    searchBus.$on('input-select', data => {
+      this.searchCategory = data;
+    });
   },
 };
 </script>

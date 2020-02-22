@@ -1,22 +1,28 @@
 <template>
-  <div>
-    <p>Coucou</p>
+  <div class="input-group mx-2">
     <input
+      class="form-control"
       type="text"
       placeholder="Rechercher par nom"
       :value="value"
-      @input="$emit('input', $event.target.value)"
+      @input="emitValue($event)"
     >
   </div>
 </template>
 
 <script>
+import {searchBus} from '../../index.js';
+
 export default {
   name: 'SearchByText',
-  props: {
-    value: {
-      type: String,
-      required: true,
+  data() {
+    return {
+      value: '',
+    };
+  },
+  methods: {
+    emitValue($event) {
+      searchBus.$emit('input-text', $event.target.value);
     },
   },
 };
