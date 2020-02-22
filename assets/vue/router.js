@@ -24,7 +24,7 @@ import Steve from './views/test/Steve';
 const routes = [
   {
     name: "Logo",
-    path: "/logo",
+    path: "/",
     component: HelloWorld
   },
   {

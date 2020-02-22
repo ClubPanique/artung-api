@@ -3,7 +3,7 @@
     <Header />
     <ArtistCard :artist="artistProp" />
     <SearchBar />
-    <ListPosts />
+    <ListPosts :artist="artistProp" />
   </div>
 </template>
 
