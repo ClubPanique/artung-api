@@ -27,6 +27,7 @@ export default {
   img {
     width: 56px;
     height: 56px;
+    border-bottom-left-radius: 5px;
   }
   .categoryButton {
     cursor: pointer;
