@@ -2,7 +2,10 @@
   <div>
     <a href="/Login">
       <div id="dot">
-          <img src="../../assets/Arrow.svg" alt="right arrow">
+        <img
+          src="../../assets/Arrow.svg"
+          alt="right arrow"
+        >
       </div>
     </a>
   </div>
