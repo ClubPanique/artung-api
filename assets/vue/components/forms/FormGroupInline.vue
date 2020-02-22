@@ -3,26 +3,36 @@
     <div>
       <label for="contenu">{{ text }}</label>
     </div>
-    <span v-if="icon=='facebook'">
-      <font-awesome-icon :icon="['fab', 'facebook']" />
+    <span v-switch="icon">
+      <span v-case="'facebook'">
+        <font-awesome-icon :icon="['fab', 'facebook']" />
+      </span>
+      <span v-case="'twitter'">
+        <font-awesome-icon :icon="['fab', 'twitter']" />
+      </span>
+      <span v-case="'youtube'">
+        <font-awesome-icon :icon="['fab', 'youtube']" />
+      </span>
+      <span v-case="'wordpress'">
+        <font-awesome-icon :icon="['fab', 'wordpress']" />
+      </span>
+      <span v-default>rien</span>
     </span>
-    <span v-else-if="icon=='twitter'">
-      <font-awesome-icon :icon="['fab', 'twitter']" />
-    </span>
-    <span v-else-if="icon=='youtube'">
-      <font-awesome-icon :icon="['fab', 'youtube']" />
-    </span>
-    <span v-else-if="icon=='wordpress'">
-      <font-awesome-icon :icon="['fab', 'wordpress']" />
-    </span>
-    <span v-else>rien</span>&nbsp;
+    &nbsp;
     <input id="contenu">
   </div>
 </template>
 
 <script>
+import { vSwitch, vCase, vDefault } from "v-switch-case";
+
 export default {
   name: "FormGroupInline",
+  directives: {
+    switch: vSwitch,
+    case: vCase,
+    default: vDefault
+  },
   props: {
     text: {
       type: String,
