@@ -23,5 +23,13 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    # we're throwing a BadRequestHttpException if there is no message.
+    # As we communicate with our frontend using the JSON format, we need to
+    # intercept such exceptions to transform them to JsonResponse.
+    App\Exception\HTTPExceptionListener\:
+        resource: '../src/Exception/HTTPExceptionListener.php'
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

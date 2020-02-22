@@ -1,7 +1,7 @@
 <template>
   <div class="fond">
     <FormGroupInline
-      icon-status="twitter"
+      icon-status="youtube"
     />
     <FormGroup
       type-status="text"
@@ -14,6 +14,8 @@
       form
     />
     <EditIcon />
+    <LoginButton />
+    <AccountButton />
   </div>
 </template>
 
@@ -23,6 +25,8 @@ import Checkbox from "../../components/forms/Checkbox";
 import FormGroup from "../../components/forms/FormGroup";
 import FormGroupInline from "../../components/forms/FormGroupInline";
 import EditIcon from "../../components/buttons/EditIcon";
+import LoginButton from "../../components/buttons/LoginButton"
+import AccountButton from "../../components/buttons/AccountButton"
 
 export default {
   name: "Steve",
@@ -31,7 +35,9 @@ export default {
     Checkbox,
     TextButton,
     FormGroupInline,
-    EditIcon
+    EditIcon,
+    LoginButton,
+    AccountButton
   },
   data() {
     return {

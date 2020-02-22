@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="listArtists">
     <ArtistCard
       v-for="(infosArtistResult, id) of infosArtistResults"
       :key="id"
@@ -45,4 +45,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.listArtists {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+@media (min-width: 768px) {
+  .listArtists {
+    flex-direction: row;
+    padding-right: 0;
+  }
+}
 </style>

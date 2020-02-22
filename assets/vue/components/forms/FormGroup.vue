@@ -1,8 +1,8 @@
 <template>
   <div>
-    <label :for="contenu">{{ text }}</label>
+    <label :for="formGroup">{{ text }}</label>
     <input
-      :id="contenu"
+      :id="formGroup"
       :value="infosArtistResults.nickname"
       :placeholder="placeholder"
     >
@@ -23,7 +23,7 @@ export default {
       type: String,
       required: true
     },
-    contenu: {
+    formGroup: {
       type: String,
       required: true
     },
@@ -39,7 +39,7 @@ export default {
   },
   computed: {
     urlArtist() {
-      return `${window.rootUrl}fans/1`;
+      return `${window.rootUrl}artists/1`;
     }
   },
   created() {
@@ -48,16 +48,33 @@ export default {
   mounted() {
     this.typeChange();
   },
+  // methods: {
+  //   typeChange: function() {
+  //     if (this.typeStatus == "email") {
+  //       this.$el.querySelector("input").setAttribute("type", "email");
+  //     } else if (this.typeStatus == "password") {
+  //       this.$el.querySelector("input").setAttribute("type", "password");
+  //     } else {
+  //       this.$el.querySelector("input").setAttribute("type", "text");
+  //     }
+  //   },
   methods: {
     typeChange: function() {
-      if (this.typeStatus == "email") {
+      switch (this.typeStatus) {
+      case "email":
         this.$el.querySelector("input").setAttribute("type", "email");
-      } else if (this.typeStatus == "password") {
+        break;
+      case "password":
         this.$el.querySelector("input").setAttribute("type", "password");
-      } else {
+        break;
+      case "text":
+        this.$el.querySelector("input").setAttribute("type", "text");
+        break;
+      default:
         this.$el.querySelector("input").setAttribute("type", "text");
       }
     },
+
     async getInfosArtist() {
       try {
         const response = await fetch(this.urlArtist);

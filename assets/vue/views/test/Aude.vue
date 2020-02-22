@@ -1,16 +1,16 @@
 <template>
   <div>
-    <ListArtists />
+    <Header />
   </div>
 </template>
 
 <script>
-import ListArtists from '../../components/artists/ListArtists'
+import Header from '../../components/navs/Header'
 
 export default {
   name: 'Aude',
   components: {
-    ListArtists
+    Header
   }
 };
 </script>
