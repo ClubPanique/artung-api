@@ -2,6 +2,7 @@
   <div class="listArtists">
     <ArtistCard
       v-for="(infosArtistResult, id) of infosArtistResults"
+      v-show="searchByCategory==''|infosArtistResult.category==searchByCategory"
       :key="id"
       :artist="infosArtistResult"
     />
@@ -16,6 +17,12 @@ export default {
   components: {
     ArtistCard,
   },
+  props: {
+    searchByCategory: {
+      type: String,
+      default: 'all'
+    }
+  },
   data() {
     return {
       infosArtistResults: null
@@ -24,7 +31,11 @@ export default {
   computed: {
     urlArtist() {
       return `${window.rootUrl}artists`;
-    }
+    },
+    // show() {
+    //   if (this.searchByCategory==''|this.infosArtistResults.category==this.searchByCategory) return true
+    //   else return false
+    // }
   },
   created() {
     this.getInfosArtist();
