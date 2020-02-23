@@ -13,21 +13,21 @@
 
 <script>
 export default {
-  name: 'LoginButton',
+  name: "LoginButton"
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  #dot {
-    height: 36px;
-    width: 36px;
-    background-color: #131B23;
-    border-radius: 50%;
-    border: 2px solid #DB5C4D;
-  }
+#dot {
+  height: 36px;
+  width: 36px;
+  background-color: #131b23;
+  border-radius: 50%;
+  border: 2px solid #db5c4d;
+}
 
-  #dot>img{
-    margin-inline-start: 4px;
-  }
+#dot > img {
+  margin-inline-start: 4px;
+}
 </style>

@@ -20,7 +20,7 @@ class ArtistsController extends AbstractController
      */
     public function index(ArtistsRepository $artistsRepository, SerializerInterface $serializer): Response
     {
-        $artist = $artistsRepository->findAll();
+        $artists = $artistsRepository->findAll();
 
         // Pour pouvoir récupérer le(s) artiste(s) associés aux fans, il faut préciser ça :
         $context['circular_reference_handler'] = function ($object) {
@@ -28,7 +28,7 @@ class ArtistsController extends AbstractController
         };
 
         // Transformation de l'objet Doctrine en JSON
-        $data = $serializer->serialize($artist, 'json', $context);
+        $data = $serializer->serialize($artists, 'json', $context);
 
         $response = new Response(
             'Artists',

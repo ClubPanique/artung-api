@@ -13,6 +13,11 @@ $theme-colors: (
   'black': rgba(19, 27, 35, 1),
 );
 
+// Pour les champs input :
+$input-border-radius: none;
+$input-border-radius-lg: none;
+$input-border-radius-sm: none;
+
 // Exemple de personnalisation des variables :
 /*
 $theme-colors: (
