@@ -6,8 +6,7 @@
       @input="emitValue($event)"
     >
       <option
-        value
-        disabled
+        value=""
         selected
       >
         Rechercher une catégorie
@@ -15,9 +14,9 @@
       <option
         v-for="(option, index) in options"
         :key="index"
-        :value="option"
+        :value="option.englishOption"
       >
-        {{ option }}
+        {{ option.frenchOption }}
       </option>
     </select>
   </div>
@@ -32,13 +31,13 @@ export default {
     return {
       value: "",
       options: [
-        "Architecture",
-        "Sculpture",
-        "Arts visuels",
-        "Musique",
-        "Littérature",
-        "Arts de la scène",
-        "Cinéma"
+        {frenchOption: "Architecture", englishOption: "architecture"},
+        {frenchOption: "Sculpture", englishOption: "sculpture"},
+        {frenchOption: "Arts visuels", englishOption: "visual"},
+        {frenchOption: "Musique", englishOption: "music"},
+        {frenchOption: "Littérature", englishOption: "literature"},
+        {frenchOption: "Arts de la scène", englishOption: "performing"},
+        {frenchOption: "Cinéma", englishOption: "film"}
       ]
     };
   },
