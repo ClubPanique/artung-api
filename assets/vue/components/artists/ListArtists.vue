@@ -1,11 +1,13 @@
 <template>
   <div class="listArtists">
     <ArtistCard
-      v-for="(infosArtistResult, id) of infosArtistResults"
-      v-show="searchByCategory==''|infosArtistResult.category==searchByCategory"
+      v-for="(artist, id) of filteredArtists"
       :key="id"
-      :artist="infosArtistResult"
+      :artist="artist"
     />
+    <p v-show="filteredArtists.length == 0">
+      Aucun artiste ne correspond à votre recherche.
+    </p>
   </div>
 </template>
 
@@ -20,7 +22,11 @@ export default {
   props: {
     searchByCategory: {
       type: String,
-      default: 'all'
+      default: ''
+    },
+    searchByText: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -32,10 +38,14 @@ export default {
     urlArtist() {
       return `${window.rootUrl}artists`;
     },
-    // show() {
-    //   if (this.searchByCategory==''|this.infosArtistResults.category==this.searchByCategory) return true
-    //   else return false
-    // }
+    filteredArtists: function() {
+      if ( this.searchByText !== '' ) {
+        return this.infosArtistResults.filter(this.filterArtistsByText);
+      } else if ( this.searchByCategory !== '' ) { return this.infosArtistResults.filter(this.filterArtistsByCategory);
+      } else {
+        return this.infosArtistResults;
+      }
+    }
   },
   created() {
     this.getInfosArtist();
@@ -48,6 +58,20 @@ export default {
         this.infosArtistResults = result;
       } catch (err) {
         console.log(err);
+      }
+    },
+    filterArtistsByText: function(obj) {
+      if ( obj.nickname.toLowerCase().includes(this.searchByText.toLowerCase()) ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    filterArtistsByCategory: function(obj) {
+      if ( obj.category === this.searchByCategory ) {
+        return true;
+      } else {
+        return false;
       }
     }
   }

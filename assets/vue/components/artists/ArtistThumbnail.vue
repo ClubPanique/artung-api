@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="artistThumbnail">
     <img
       :src="artist.photo"
       :alt="`Photo de ${ artist.nickname }`"
@@ -54,6 +54,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.artistThumbnail {
+  position: relative;
+}
   img {
     width: 56px;
     height: 56px;
@@ -63,7 +66,7 @@ export default {
   .categoryButton {
     cursor: pointer;
     position: absolute;
-    top: 2px;
+    top: 0;
     left: 2px;
     border: 0;
     background-color: transparent;

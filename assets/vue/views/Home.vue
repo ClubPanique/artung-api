@@ -2,7 +2,10 @@
   <div>
     <Header />
     <SearchBar />
-    <ListArtists :search-by-category="searchCategory" />
+    <ListArtists
+      :search-by-category="searchCategory"
+      :search-by-text="searchText"
+    />
   </div>
 </template>
 

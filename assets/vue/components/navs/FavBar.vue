@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     urlFav() {
-      return `${window.rootUrl}artists/1`;
+      return `${window.rootUrl}fans/2`;
     }
   },
   created() {
@@ -34,7 +34,7 @@ export default {
       try {
         const response = await fetch(this.urlFav);
         const result = await response.json();
-        this.favResults = result.fans;
+        this.favResults = result.favoris;
       } catch (err) {
         console.log(err);
       }
