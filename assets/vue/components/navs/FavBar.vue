@@ -1,6 +1,10 @@
 <template>
   <div>
-    <ArtistThumbnail />
+    <ArtistThumbnail
+      v-for="(favResult, id) of favResults"
+      :key="id"
+      :artist="favResult"
+    />
   </div>
 </template>
 
@@ -11,6 +15,30 @@ export default {
   name: 'FavBar',
   components: {
     ArtistThumbnail,
+  },
+  data() {
+    return {
+      favResults: null
+    }
+  },
+  computed: {
+    urlFav() {
+      return `${window.rootUrl}artists/1`;
+    }
+  },
+  created() {
+    this.getFav();
+  },
+  methods: {
+    async getFav() {
+      try {
+        const response = await fetch(this.urlFav);
+        const result = await response.json();
+        this.favResults = result.fans;
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
 };
 </script>

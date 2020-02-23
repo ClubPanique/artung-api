@@ -24,7 +24,7 @@ import Steve from './views/test/Steve';
 const routes = [
   {
     name: "Logo",
-    path: "/logo",
+    path: "/",
     component: HelloWorld
   },
   {
@@ -56,7 +56,8 @@ const routes = [
   {
     name: "ArtistDetails",
     path: "/fan/artist/:id",
-    component: ArtistDetails
+    component: ArtistDetails,
+    props: true
   },
   {
     name: "FanAccount",

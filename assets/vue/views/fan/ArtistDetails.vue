@@ -1,9 +1,9 @@
 <template>
   <div>
     <Header />
-    <ArtistCard />
+    <ArtistCard :artist="artistProp" />
     <SearchBar />
-    <ListPosts />
+    <ListPosts :artist="artistProp" />
   </div>
 </template>
 
@@ -20,6 +20,11 @@ export default {
     ArtistCard,
     SearchBar,
     ListPosts,
+  },
+  computed: {
+    artistProp() {
+      return this.$route.params.artist;
+    }
   }
 };
 </script>
