@@ -19,6 +19,8 @@ security:
       guard:
         authenticators:
           - App\Security\UserAuthenticator
+      json_login:
+        check_path: /api/login
       logout:
         path: app_logout
         target: /home
