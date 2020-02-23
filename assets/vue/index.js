@@ -1,9 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
-
-// Variables globales
-window.rootUrl = 'http://localhost:8000/api/';
+import './variables';
 
 // Imports fontawesome
 import {library} from '@fortawesome/fontawesome-svg-core';

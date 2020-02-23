@@ -15,3 +15,7 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+###> variables JS sensibles ###
+/assets/vue/variables.js
+###< variables JS sensibles ###
