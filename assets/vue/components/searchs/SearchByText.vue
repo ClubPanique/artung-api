@@ -1,5 +1,5 @@
 <template>
-  <div class="input-group mx-2">
+  <div class="input-group my-2 mr-2">
     <input
       class="form-control"
       type="text"
@@ -11,20 +11,20 @@
 </template>
 
 <script>
-import {searchBus} from '../../index.js';
+import { searchBus } from "../../index.js";
 
 export default {
-  name: 'SearchByText',
+  name: "SearchByText",
   data() {
     return {
-      value: '',
+      value: ""
     };
   },
   methods: {
     emitValue($event) {
-      searchBus.$emit('input-text', $event.target.value);
-    },
-  },
+      searchBus.$emit("input-text", $event.target.value);
+    }
+  }
 };
 </script>
 

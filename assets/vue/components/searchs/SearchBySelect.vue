@@ -1,12 +1,12 @@
 <template>
-  <div class="input-group mx-2">
+  <div class="input-group m-2">
     <select
       class="form-control"
       :value="value"
       @input="emitValue($event)"
     >
       <option
-        value=""
+        value
         disabled
         selected
       >
@@ -24,34 +24,35 @@
 </template>
 
 <script>
-import {searchBus} from '../../index.js';
+import { searchBus } from "../../index.js";
 
 export default {
-  name: 'SearchBySelect',
+  name: "SearchBySelect",
   data() {
     return {
-      value: '',
+      value: "",
       options: [
-        'Architecture',
-        'Sculpture',
-        'Arts visuels',
-        'Musique',
-        'Littérature',
-        'Arts de la scène',
-        'Cinéma',
-      ],
+        "Architecture",
+        "Sculpture",
+        "Arts visuels",
+        "Musique",
+        "Littérature",
+        "Arts de la scène",
+        "Cinéma"
+      ]
     };
   },
   methods: {
     emitValue($event) {
-      searchBus.$emit('input-select', $event.target.value);
-    },
-  },
+      searchBus.$emit("input-select", $event.target.value);
+    }
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+/* Permet d'afficher une flèche personnalisée */
 select {
   background-image: linear-gradient(45deg, transparent 50%, black 60%),
     linear-gradient(135deg, black 40%, transparent 50%) !important;
