@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 /**
  * @Route("/api")
@@ -14,14 +17,35 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+  /** @var SerializerInterface */
+  private $serializer;
+
+  public function __construct(SerializerInterface $serializer)
+  {
+    $this->serializer = $serializer;
+  }
+
   /**
    * @Route("/login", name="app_login")
    */
   public function login(Request $request, AuthenticationUtils $authenticationUtils): Response
   {
+    $user = $this->getUser();
+    // Si l'utilisateur existe, on renvoie un clone de l'objet user sans son mot de passe au format JSON
+    $userClone = clone $user;
+    $userClone->setPassword('');
+
+    $data = $this->serializer->serialize($userClone, JsonEncoder::FORMAT);
+
+    return new JsonResponse($data, Response::HTTP_OK, [], true);
+
+    /*
     if ($this->getUser()) {
-      return $this->redirectToRoute('index', array('vueRouting' => 'home'));
+
+      //return $this->redirectToRoute('index', array('vueRouting' => 'home'));
     } else {
+      // Sinon, on afficher le formulaire de login
+
       // get the login error if there is one
       $error = $authenticationUtils->getLastAuthenticationError();
       // last username entered by the user
@@ -32,6 +56,7 @@ class SecurityController extends AbstractController
         'last_username' => $lastUsername
       ]);
     }
+    */
   }
 
   /**
