@@ -30,7 +30,8 @@ export default {
     placeholder: {
       type: String,
       required: true
-    }
+    },
+    readonly: Boolean
   },
   data() {
     return {
@@ -44,9 +45,13 @@ export default {
   },
   created() {
     this.getInfosArtist();
+    this.isReadonly();
+    $forceUpdate;
   },
   mounted() {
     this.typeChange();
+    this.isReadonly();
+    $forceUpdate;
   },
   // methods: {
   //   typeChange: function() {
@@ -72,6 +77,16 @@ export default {
         break;
       default:
         this.$el.querySelector("input").setAttribute("type", "text");
+      }
+    },
+    isReadonly: function() {
+      alert("Avant le test : FormGroup -> readonly =" + this.readonly);
+      if (this.readonly) {
+        this.$el.querySelector("button").attr("readonly", true);
+        alert("FormGroup : if lancé ! readonly ok -> readonly =" + this.readonly);
+      } else {
+        this.$el.querySelector("button").attr("readonly", false);
+        alert("FormGroup : else lancé ! readonly ko -> readonly =" + readonly);
       }
     },
 
