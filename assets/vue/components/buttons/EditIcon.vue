@@ -2,7 +2,7 @@
   <div>
     <button
       type="submit"
-      @click="isEdit = !isEdit"
+      @click="isEdit = !isEdit; editable();"
     >
       <!-- Affichage du bouton edit -->
       <span v-show="isEdit">
@@ -21,12 +21,38 @@
 </template>
 
 <script>
+import readonly from "../forms/FormGroup";
+
 export default {
   name: "EditIcon",
+  components: {
+    readonly
+  },
   props: {
     isEdit: Boolean
   },
-  methods: {}
+
+  data() {
+    return {
+      readonly: false
+    };
+  },
+  mounted() {
+    this.editable()
+  },
+  methods: {
+    editable: function() {
+      if (this.isEdit) {
+        this.readonly = false;
+        alert("EditIcon -> readonly=" + this.readonly);
+        //   this.$el.querySelector("button").toggleAttribute("readonly");
+        //   this.$el.querySelector("button").attr('readonly', true);
+      } else {
+        this.readonly = true;
+        alert("EditIcon -> readonly=" + this.readonly);
+      }
+    }
+  }
 };
 </script>
 
