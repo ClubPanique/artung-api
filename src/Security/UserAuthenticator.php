@@ -33,7 +33,6 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
     private $urlGenerator;
     private $csrfTokenManager;
     private $passwordEncoder;
-    /** @var SerializerInterface */
     private $serializer;
 
 

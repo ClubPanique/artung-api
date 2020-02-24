@@ -12,36 +12,37 @@
 </template>
 
 <script>
-import ArtistCard from './ArtistCard'
+import ArtistCard from "./ArtistCard";
 
 export default {
-  name: 'ListArtists',
+  name: "ListArtists",
   components: {
-    ArtistCard,
+    ArtistCard
   },
   props: {
     searchByCategory: {
       type: String,
-      default: ''
+      default: ""
     },
     searchByText: {
       type: String,
-      default: ''
+      default: ""
     }
   },
   data() {
     return {
       infosArtistResults: null
-    }
+    };
   },
   computed: {
     urlArtist() {
       return `${window.rootUrl}artists`;
     },
     filteredArtists: function() {
-      if ( this.searchByText !== '' ) {
+      if (this.searchByText !== "") {
         return this.infosArtistResults.filter(this.filterArtistsByText);
-      } else if ( this.searchByCategory !== '' ) { return this.infosArtistResults.filter(this.filterArtistsByCategory);
+      } else if (this.searchByCategory !== "") {
+        return this.infosArtistResults.filter(this.filterArtistsByCategory);
       } else {
         return this.infosArtistResults;
       }
@@ -61,14 +62,16 @@ export default {
       }
     },
     filterArtistsByText: function(obj) {
-      if ( obj.nickname.toLowerCase().includes(this.searchByText.toLowerCase()) ) {
+      if (
+        obj.nickname.toLowerCase().includes(this.searchByText.toLowerCase())
+      ) {
         return true;
       } else {
         return false;
       }
     },
     filterArtistsByCategory: function(obj) {
-      if ( obj.category === this.searchByCategory ) {
+      if (obj.category === this.searchByCategory) {
         return true;
       } else {
         return false;

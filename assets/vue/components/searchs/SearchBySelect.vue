@@ -2,21 +2,21 @@
   <div class="input-group m-2">
     <select
       class="form-control"
-      :value="value"
+      :value="search.label"
       @input="emitValue($event)"
     >
       <option
-        value=""
+        search.label
         selected
       >
-        Rechercher une catégorie
+        {{ search.label }}
       </option>
       <option
-        v-for="(option, index) in options"
+        v-for="(option, index) in search.options"
         :key="index"
-        :value="option.englishOption"
+        :value="option.value"
       >
-        {{ option.frenchOption }}
+        {{ option.text }}
       </option>
     </select>
   </div>
@@ -27,23 +27,15 @@ import { searchBus } from "../../index.js";
 
 export default {
   name: "SearchBySelect",
-  data() {
-    return {
-      value: "",
-      options: [
-        {frenchOption: "Architecture", englishOption: "architecture"},
-        {frenchOption: "Sculpture", englishOption: "sculpture"},
-        {frenchOption: "Arts visuels", englishOption: "visual"},
-        {frenchOption: "Musique", englishOption: "music"},
-        {frenchOption: "Littérature", englishOption: "literature"},
-        {frenchOption: "Arts de la scène", englishOption: "performing"},
-        {frenchOption: "Cinéma", englishOption: "film"}
-      ]
-    };
+  props: {
+    search: {
+      type: Object,
+      required: true
+    }
   },
   methods: {
     emitValue($event) {
-      searchBus.$emit("input-select", $event.target.value);
+      searchBus.$emit("input-" + this.search.type, $event.target.value);
     }
   }
 };
