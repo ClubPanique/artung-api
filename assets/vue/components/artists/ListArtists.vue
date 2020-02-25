@@ -1,10 +1,12 @@
 <template>
-  <div class="listArtists">
-    <ArtistCard
-      v-for="(artist, id) of filteredArtists"
-      :key="id"
-      :artist="artist"
-    />
+  <div>
+    <div class="listArtists">
+      <ArtistCard
+        v-for="(artist, id) of filteredArtists"
+        :key="id"
+        :artist="artist"
+      />
+    </div>
     <p v-show="filteredArtists.length == 0">
       Aucun artiste ne correspond à votre recherche.
     </p>
@@ -86,12 +88,12 @@ export default {
 .listArtists {
   display: flex;
   flex-direction: column;
-  padding: 5px;
+  padding-top: 5px;
 }
 @media (min-width: 768px) {
   .listArtists {
     flex-direction: row;
-    padding-right: 0;
+    padding-right: 5px;
   }
 }
 </style>

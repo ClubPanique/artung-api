@@ -1,7 +1,10 @@
 <template>
   <div>
     <Header />
-    <ArtistCard :artist="artistProp" />
+    <ArtistCard
+      :artist="artistProp"
+      :style="styleObject"
+    />
     <SearchBar :search-types="searchTypes" />
     <ListPosts :artist="artistProp" />
   </div>
@@ -23,7 +26,8 @@ export default {
   },
   data() {
     return {
-      searchTypes: ["flux", "date"]
+      searchTypes: ["flux", "date"],
+      styleObject: {width: "inherit", marginRight: "5px"}
     };
   },
   computed: {

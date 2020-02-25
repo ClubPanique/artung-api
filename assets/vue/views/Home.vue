@@ -33,7 +33,7 @@ export default {
     searchBus.$on("input-text", data => {
       this.searchText = data;
     });
-    searchBus.$on("input-select", data => {
+    searchBus.$on("input-category", data => {
       this.searchCategory = data;
     });
   }

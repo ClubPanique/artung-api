@@ -54,10 +54,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .artistCard {
-    width: 100%;
     min-height: 60px;
     max-height: 240px;
-    margin-bottom: 5px;
+    margin: 0 5px 5px 5px;
     background-color: var(--dark);
     border-radius: 0 5px 5px 5px;
     cursor: pointer;
@@ -96,7 +95,7 @@ export default {
   @media (min-width: 768px) {
     .artistCard {
       width: 50%;
-      margin-right: 5px;
+      margin-right: 0;
     }
   }
 </style>
