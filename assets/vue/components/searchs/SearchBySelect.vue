@@ -2,14 +2,19 @@
   <div class="input-group m-2">
     <select
       class="form-control"
-      :value="search.label"
+      :value="value"
       @input="emitValue($event)"
     >
       <option
-        search.label
+        value
         selected
+        disabled
+        hidden
       >
         {{ search.label }}
+      </option>
+      <option value>
+        Pas de filtre
       </option>
       <option
         v-for="(option, index) in search.options"
