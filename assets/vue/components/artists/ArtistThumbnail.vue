@@ -4,13 +4,18 @@
       :src="artist.photo"
       :alt="`Photo de ${ artist.nickname }`"
     >
-    <div class="categoryButton">
+    <div
+      class="categoryButton"
+      @click="emitValue(artist.category)"
+    >
       <font-awesome-icon :icon="artistCategory" />
     </div>
   </div>
 </template>
 
 <script>
+import { searchBus } from "../../index.js";
+
 /* eslint-disable no-unreachable */
 export default {
   name: 'ArtistThumbnail',
@@ -47,6 +52,11 @@ export default {
       default:
         return 'question';
       }
+    }
+  },
+  methods: {
+    emitValue($event) {
+      searchBus.$emit("input-category", $event);
     }
   }
 };

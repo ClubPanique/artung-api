@@ -5,7 +5,7 @@
   >
     <div
       class="artistInfos"
-      @click="$router.push({ name: 'ArtistDetails', params: { id: artist.id, artist: artistProp }})"
+      @click.self="$router.push({ name: 'ArtistDetails', params: { id: artist.id, artist: artistProp }})"
     >
       <ArtistThumbnail :artist="artistProp" />
       <h2 class="artistNickname">
