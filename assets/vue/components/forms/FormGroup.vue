@@ -5,6 +5,7 @@
       :id="formGroup"
       :value="infosArtistResults.nickname"
       :placeholder="placeholder"
+      @readonlyStatus="readonlyStatus"
     >
   </div>
 </template>
@@ -31,7 +32,7 @@ export default {
       type: String,
       required: true
     },
-    readonly: Boolean
+    readonlyStatus: Boolean
   },
   data() {
     return {
@@ -41,17 +42,14 @@ export default {
   computed: {
     urlArtist() {
       return `${window.rootUrl}artists/1`;
+    },
+    isReadonly: function() {
+      if (this.readonlyStatus) {
+        return "readonly";
+      } else {
+        return "";
+      }
     }
-  },
-  created() {
-    this.getInfosArtist();
-    this.isReadonly();
-    $forceUpdate;
-  },
-  mounted() {
-    this.typeChange();
-    this.isReadonly();
-    $forceUpdate;
   },
   // methods: {
   //   typeChange: function() {
@@ -63,6 +61,12 @@ export default {
   //       this.$el.querySelector("input").setAttribute("type", "text");
   //     }
   //   },
+  created() {
+    this.getInfosArtist();
+  },
+  mounted() {
+    this.typeChange();
+  },
   methods: {
     typeChange: function() {
       switch (this.typeStatus) {
@@ -79,16 +83,17 @@ export default {
         this.$el.querySelector("input").setAttribute("type", "text");
       }
     },
-    isReadonly: function() {
-      alert("Avant le test : FormGroup -> readonly =" + this.readonly);
-      if (this.readonly) {
-        this.$el.querySelector("button").attr("readonly", true);
-        alert("FormGroup : if lancé ! readonly ok -> readonly =" + this.readonly);
-      } else {
-        this.$el.querySelector("button").attr("readonly", false);
-        alert("FormGroup : else lancé ! readonly ko -> readonly =" + readonly);
-      }
-    },
+    // isReadonly: function() {
+    //   if (this.readonlyStatus) {
+    //     this.$el.querySelector("input").attr("readonly", true);
+    //     alert(
+    //       "FormGroup : if lancé ! readonly ok -> readonly =" + this.readonly
+    //     );
+    //   } else {
+    //     this.$el.querySelector("input").attr("readonly", false);
+    //     alert("FormGroup : else lancé ! readonly ko -> readonly =" + readonly);
+    //   }
+    // },
 
     async getInfosArtist() {
       try {
