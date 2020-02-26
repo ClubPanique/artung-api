@@ -4,19 +4,108 @@
 
 // Ecrire les variables personnalisées ici :
 $theme-colors: (
-  'primary': rgba(219, 92, 61, 1),
-  'secondary': rgba(18, 41, 50, 1),
-  'light': rgba(243, 239, 245, 1),
-  'light-semi-transparent': rgba(243, 239, 245, 0.8),
-  'light-transparent': rgba(243, 239, 245, 0.3),
-  'dark': rgba(64, 63, 76, 1),
-  'black': rgba(19, 27, 35, 1),
+  "primary": rgba(219, 92, 61, 1),
+  "secondary": rgba(18, 41, 50, 1),
+  "light": rgba(243, 239, 245, 1),
+  "light-semi-transparent": rgba(243, 239, 245, 0.8),
+  "light-transparent": rgba(243, 239, 245, 0.3),
+  "dark": rgba(64, 63, 76, 1),
+  "black": rgba(19, 27, 35, 1)
 );
 
 // Pour les champs input :
 $input-border-radius: none;
 $input-border-radius-lg: none;
 $input-border-radius-sm: none;
+
+// Fonts
+@font-face {
+  font-family: "Montserrat";
+  src: url("./fonts/Montserrat/Montserrat-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Lora";
+  src: url("./fonts/Lora/Lora-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Caveat";
+  src: url("./fonts/Caveat/Caveat-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Alegreya Sans";
+  src: url("./fonts/Alegreya_Sans/AlegreyaSans-Regular.ttf") format("truetype");
+}
+
+html,
+body {
+  font-size: 10px;
+}
+
+h1 {
+  margin-bottom: 3rem;
+  font-family: Montserrat;
+  font-size: 6.103515625em;
+  line-height: 9rem;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: 0em;
+}
+
+h2 {
+  margin-bottom: 3rem;
+  font-family: Montserrat;
+  font-size: 4.8828125em;
+  line-height: 6rem;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: 0em;
+}
+
+p {
+  margin-bottom: 3rem;
+  font-family: Lora;
+  font-size: 1.6em;
+  line-height: 3rem;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0em;
+}
+
+@media screen and (max-width: 720px) {
+  h1 {
+    margin-bottom: 2rem;
+    font-family: Caveat;
+    font-size: 3em;
+    line-height: 3rem;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: -0em;
+    color: #f1e7e7;
+  }
+  h2 {
+    margin-bottom: 2rem;
+    font-family: Caveat;
+    font-size: 2.25em;
+    line-height: 2.25rem;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0em;
+    color: #f1e7e7;
+  }
+  p {
+    margin-bottom: 2rem;
+    font-family: Alegreya Sans;
+    font-size: 1.5em;
+    line-height: 2rem;
+    font-weight: 300;
+    font-style: normal;
+    letter-spacing: 0em;
+    color: #f1e7e7;
+  }
+}
 
 // Exemple de personnalisation des variables :
 /*
