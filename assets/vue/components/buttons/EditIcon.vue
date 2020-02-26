@@ -21,21 +21,12 @@
 </template>
 
 <script>
-import readonly from "../forms/FormGroup";
+// import readonly from "../forms/FormGroup";
 
 export default {
   name: "EditIcon",
-  components: {
-    readonly
-  },
   props: {
     isEdit: Boolean
-  },
-
-  data() {
-    return {
-      readonly: false
-    };
   },
   mounted() {
     this.editable()
@@ -43,13 +34,13 @@ export default {
   methods: {
     editable: function() {
       if (this.isEdit) {
-        this.readonly = false;
-        alert("EditIcon -> readonly=" + this.readonly);
+        this.$emit("readonlyStatus", false);
+        alert("EditIcon -> readonly=" + !this.isEdit);
         //   this.$el.querySelector("button").toggleAttribute("readonly");
         //   this.$el.querySelector("button").attr('readonly', true);
       } else {
-        this.readonly = true;
-        alert("EditIcon -> readonly=" + this.readonly);
+        this.$emit("readonlyStatus", true);
+        alert("EditIcon -> readonly=" + this.isEdit);
       }
     }
   }
